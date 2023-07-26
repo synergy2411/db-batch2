@@ -113,12 +113,109 @@ var marks = [90, 92, 89, 95, 85, 99];
 
 // console.log(nestedFn()); // 7
 
-function greet() {
-  console.log("Hello there!");
+// function greet() {
+//   console.log("Hello there!");
+// }
+
+// function demoGreet(cb) {
+//   cb();
+// }
+
+// demoGreet(greet);
+
+// First Class
+// function greet () {
+//     console.log("DEMO")
+// }
+
+// // Higher Order function (HOF)
+// function demo(cb) {
+//     cb()
+//  }
+
+// demo(greet)
+
+// setTimeout(() => {
+//   console.log("3 seconds left");
+// }, 3000);
+
+// function demo() {
+//   return function () {
+//     return "Hello World";
+//   };
+// }
+
+// var nestedFn = demo();
+// console.log(nestedFn());
+
+// CLOSURE : process of binding the outer scope variable with nested functions
+
+// function mystry() {
+//   var x = 4;
+//   return function () {
+//     return ++x;
+//   };
+// }
+
+// // console.log(mystry()); // ?
+
+// const nestedFn = mystry();
+
+// console.log(nestedFn()); // 5
+// console.log(nestedFn()); // 6
+
+// function buildTicket(transport) {
+//   var numberOfPassengers = 0;
+//   return function (name) {
+//     return (
+//       "Hello Mr/s. " +
+//       name +
+//       "! \n" +
+//       "You are going via " +
+//       transport +
+//       " \n" +
+//       "Your Ticket ID is : " +
+//       ++numberOfPassengers
+//     );
+//   };
+// }
+
+// var shipFn = buildTicket("Ship");
+// console.log(shipFn("John Doe"));
+// console.log(shipFn("Jenny")); // ?
+
+// var carFn = buildTicket("Car");
+// console.log(carFn("Jack")); // ?
+
+// var x = 301;
+
+// function a() {
+//   var x = 201;
+//   function b() {
+//     var x = 101;
+//     console.log(x); // 201
+//   }
+
+//   b();
+// }
+
+// a();
+
+// scope chain
+// - nested scope -> outer scope -> global scope
+
+// Lexical scoping
+// Physical placement of the function matters
+
+var x = 201;
+
+function b() {
+  console.log(x); // ?
 }
 
-function demoGreet(cb) {
-  cb();
+function a() {
+  var x = 101;
+  b();
 }
 
-demoGreet(greet);
+a();
