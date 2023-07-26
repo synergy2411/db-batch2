@@ -14,12 +14,17 @@ window.onload = function () {
       });
 
       const result = await response.json();
-
-      // console.log("RESULT : ", result);
-      fetchTodos();
+      addNewItem(result);
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const addNewItem = (newItem) => {
+    const liElement = document.createElement("li");
+    liElement.innerHTML = newItem.label.toUpperCase();
+    liElement.classList.add("list-group-item", "my-list-style");
+    liContainer.append(liElement);
   };
 
   const createUi = (todos) => {
@@ -36,7 +41,7 @@ window.onload = function () {
     try {
       const response = await fetch("http://localhost:3000/todos");
       const todos = await response.json();
-      createUi(todos);
+      createUi(true, todos);
     } catch (err) {
       console.error(err);
     }
