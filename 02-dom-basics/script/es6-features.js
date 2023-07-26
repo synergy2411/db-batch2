@@ -239,14 +239,94 @@
 
 // Short curcuit operator - &&
 
-let arr = [];
-const str = arr.length > 0 ? "Hello" : "Good Bye";
-console.log("String 1 -", str);
+// let arr = [];
+// const str = arr.length > 0 ? "Hello" : "Good Bye";
+// console.log("String 1 -", str);
 
-const strTwo = arr.length > 0 && "Hello";
+// const strTwo = arr.length > 0 && "Hello";
 
-console.log("String 2 -", strTwo); // ?
+// console.log("String 2 -", strTwo); // ?
 
-const strThree = null && "Hello";
+// const strThree = 1 && "Hello";
 
-console.log("String 3 - ", strThree);
+// console.log("String 3 - ", strThree);
+
+// PROMISE API
+//  - Placeholder for future value
+// - Pending State
+// - Settled State (Success (Resolved), Failure (Rejected))
+
+// produce promise
+// const promiseProducer = () => {
+//   let promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve({ message: "SUCCESS" });
+//     //   reject(new Error("Something went wrong!!"));
+//     }, 3000);
+//   });
+//   return promise;
+// };
+
+// consume promise
+// - async...await
+
+// const promiseConsumer = async () => {
+//   try {
+//     let result = await promiseProducer();
+//     console.log("RESULT : ", result);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+// promiseConsumer();
+
+// - then().catch()
+// const promiseConsumer = () => {
+//   promiseProducer()
+//     .then((result) => {
+//       console.log("First Then Statement -> ", result);
+//       return result.message;
+//     })
+//     .then((message) => console.log("Message : ", message))
+//     .catch(console.error);
+// };
+
+// promiseConsumer();
+
+// Remote Server Call
+// - fetch API -> promise object
+
+// fetch("https://jsonplaceholder.typicode.com/users")
+//   .then((response) => {
+//     console.log("RESPONSE : ", response);
+//     return response.json();
+//   })
+//   .then((users) => console.log("USERS : ", users))
+//   .catch(console.error);
+
+// const fetchUsers = async () => {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/users");
+//     const result = await response.json();
+//     console.log("ASYNC RESULT : ", result);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+// fetchUsers();
+
+// OLD CODE - XHR Object
+
+let xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function () {
+  if (this.status === 200 && this.readyState === 4) {
+    console.log(JSON.parse(this.responseText));
+  }
+};
+
+xhr.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+
+xhr.send();
