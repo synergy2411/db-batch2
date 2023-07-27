@@ -10,7 +10,7 @@ test("renders heading element", () => {
   expect(headingElement).toBeInTheDocument();
 });
 
-test("renders 'toggle is false' is button is not clicked", () => {
+test("renders 'toggle is false' if button is not clicked", () => {
   render(<Output />);
 
   const pElement = screen.getByText("toggle is false", { exact: false });
@@ -36,5 +36,17 @@ test("renders 'toggle is true' when the button is clicked", async () => {
   const pElement = await screen.findByText(/toggle is true/i);
 
   expect(pElement).not.toBeNull();
+});
+
+test("renders not 'toggle is false' if the button is clicked", async () => {
+  render(<Output />);
+
+  const btnElement = screen.getByRole("button");
+
+  userEvent.click(btnElement);
+
+  const pElement = await screen.findByText(/toggle is false/i);
+
+  expect(pElement).not.toBeInTheDocument();
 });
 // npm run test
