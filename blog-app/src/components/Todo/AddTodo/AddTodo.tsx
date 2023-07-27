@@ -6,9 +6,12 @@ interface IProps {
 }
 
 const AddTodo: React.FC<IProps> = (props) => {
-  const [enteredLabel, setEnteredLabel] = useState<string>("Hello world");
+  const [enteredLabel, setEnteredLabel] = useState<string>("");
 
   const submitHandler = () => {
+    if (enteredLabel.trim() === "") {
+      return;
+    }
     let newTodo: ITodo = {
       id: Math.round(Math.random() * 1000).toString(),
       label: enteredLabel,
@@ -39,6 +42,7 @@ const AddTodo: React.FC<IProps> = (props) => {
                         type="button"
                         className="btn btn-dark"
                         onClick={submitHandler}
+                        disabled={enteredLabel.trim() === ""}
                       >
                         Add
                       </button>

@@ -19,7 +19,10 @@ const Todo = () => {
   };
 
   const addTodo = (newTodo: ITodo) => {
-    setTodoCollection((prevTodos) => [newTodo, ...prevTodos]);
+    setTodoCollection((prev) => {
+      return [newTodo, ...prev];
+    });
+    setToggle(false);
   };
   return (
     <div>
