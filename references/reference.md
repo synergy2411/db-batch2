@@ -5,3 +5,8 @@
 - cd blog-app
 
 - npm start
+
+# to install bootstrap
+
+- npm install bootstrap
+- import bootstrap in index.tsx
