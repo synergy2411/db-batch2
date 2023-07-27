@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { ITodo } from "../../../model/todo.interface";
+import AuthContext from "../../../context/auth-context";
 
 interface IProps {
   addTodo: (todo: ITodo) => void;
@@ -7,6 +8,8 @@ interface IProps {
 
 const AddTodo: React.FC<IProps> = (props) => {
   const [enteredLabel, setEnteredLabel] = useState<string>("");
+
+  const context = useContext(AuthContext);
 
   const submitHandler = () => {
     if (enteredLabel.trim() === "") {
@@ -19,6 +22,19 @@ const AddTodo: React.FC<IProps> = (props) => {
     props.addTodo(newTodo);
     setEnteredLabel("");
   };
+  if (context.isLoggedIn) {
+    return (
+      <>
+        <h1>User is logged in</h1>
+        <button
+          className="btn btn-primary"
+          onClick={() => context.setIsLoggedIn(false)}
+        >
+          Logout
+        </button>
+      </>
+    );
+  }
   return (
     <div className="row">
       <div className="col-6 offset-3">
