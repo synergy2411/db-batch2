@@ -10,3 +10,15 @@
 
 - npm install bootstrap
 - import bootstrap in index.tsx
+
+# useEffect Flavors
+
+- useEffect(cb) -> will run for every render cycle of component
+- useEffect(cb, []) ( componentDidMount )-> will run only once, at the time of intial redering of component
+- useEffect(cb, [Dependency]) (componentDidUpdate) -> cb run at initial rendering of component & will run whenever the dependency changes
+- useEffect(cb -> cleanUpFn, [Dependency]) (componentWillUnmount)->
+  > cb run at initial rendering of component
+  > dependency will change
+  > cleanupFn runs
+  > cb runs
+  > cleanUpFn will run when the component is about to unload from browser

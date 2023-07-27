@@ -1,27 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoItem from "./TodoItem/TodoItem";
 import AddTodo from "./AddTodo/AddTodo";
 import { ITodo } from "../../model/todo.interface";
 
-let INITIAL_TODOS: ITodo[] = [
-  { id: "t001", label: "pot the plants" },
-  { id: "t002", label: "renew car insurance" },
-  { id: "t003", label: "buy new jeans" },
-  { id: "t004", label: "shop for grocery" },
-];
+// let INITIAL_TODOS: ITodo[] = [
+//   { id: "t001", label: "pot the plants" },
+//   { id: "t002", label: "renew car insurance" },
+//   { id: "t003", label: "buy new jeans" },
+//   { id: "t004", label: "shop for grocery" },
+// ];
 
 const Todo = () => {
   let [toggle, setToggle] = useState<boolean>(false);
-  const [todoCollection, setTodoCollection] = useState<ITodo[]>(INITIAL_TODOS);
+  const [todoCollection, setTodoCollection] = useState<ITodo[]>([]);
 
-  const deleteTodo = (todoId: string) => {
-    console.log("About to Delete - ", todoId);
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await fetch("http://localhost:3030/todos");
+        const todos = await response.json();
+        setTodoCollection(todos);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchTodos();
+  }, []);
+
+  const deleteTodo = async (todoId: string) => {
+    try {
+      const response = await fetch("http://localhost:3030/todos/" + todoId, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      setTodoCollection((prevTodos) =>
+        prevTodos.filter((todo) => todo.id !== todoId)
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const addTodo = (newTodo: ITodo) => {
-    setTodoCollection((prev) => {
-      return [newTodo, ...prev];
-    });
+  const addTodo = async (newTodo: ITodo) => {
+    try {
+      const response = await fetch("http://localhost:3030/todos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTodo),
+      });
+      const result = await response.json();
+      setTodoCollection((prev) => {
+        return [result, ...prev];
+      });
+    } catch (err) {
+      console.log(err);
+    }
     setToggle(false);
   };
   return (
