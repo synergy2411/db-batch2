@@ -1,10 +1,12 @@
 import ClassBased from "./components/Demo/ClassBased";
+import Uncontrolled from "./components/Demo/Uncontrolled";
 import Todo from "./components/Todo/Todo";
 
 function App() {
   return (
     <div className="container">
-      <ClassBased />
+      <Uncontrolled />
+      {/* <ClassBased /> */}
       {/* <Todo /> */}
     </div>
   );
