@@ -22,3 +22,10 @@
   > cleanupFn runs
   > cb runs
   > cleanUpFn will run when the component is about to unload from browser
+
+# redux basics
+
+- npm init -y [Generate package.json file]
+- npm i redux
+
+- npm install @reduxjs/toolkit react-redux
