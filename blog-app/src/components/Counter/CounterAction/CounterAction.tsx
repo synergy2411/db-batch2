@@ -6,10 +6,11 @@ export default function CounterAction() {
   const dispatch = useDispatch<AppDispatch>();
 
   const increaseCounterClickHandler = () => {
-    dispatch(increment(0));
+    dispatch(increment());
   };
 
-  const decreaseCounterClickHandler = () => dispatch(decrement(0));
+  const decreaseCounterClickHandler = () => dispatch(decrement());
+
   return (
     <div>
       <button className="btn btn-primary" onClick={increaseCounterClickHandler}>
